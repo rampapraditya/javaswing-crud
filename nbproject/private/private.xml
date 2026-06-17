@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/project/java/crud-mysql/src/controller/ProdukController.java</file>
+            <file>file:/D:/project/java/crud-mysql/src/model/Produk.java</file>
+            <file>file:/D:/project/java/crud-mysql/src/view/Main.java</file>
+            <file>file:/D:/project/java/crud-mysql/src/repository/ProdukRepository.java</file>
+            <file>file:/D:/project/java/crud-mysql/src/repository/ProdukRepositoryImpl.java</file>
+            <file>file:/D:/project/java/crud-mysql/src/config/DatabaseConfig.java</file>
+        </group>
+    </open-files>
+</project-private>
