@@ -9,11 +9,9 @@ import model.Produk;
  */
 public interface ProdukRepository {
 
-    void insert(Produk produk);
-
-    void update(Produk produk);
-
-    void delete(int id);
+    boolean insert(Produk produk);
+    boolean update(Produk produk);
+    boolean delete(int id);
 
     List<Produk> findAll();
 }

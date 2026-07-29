@@ -23,35 +23,49 @@ public class ProdukRepositoryImpl implements ProdukRepository {
     }
 
     @Override
-    public void insert(Produk produk) {
+    public boolean insert(Produk produk) {
         String sql = "INSERT INTO produk (nama_produk, harga, stok) VALUES (?, ?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, produk.getNamaProduk());
             ps.setDouble(2, produk.getHarga());
             ps.setInt(3, produk.getStok());
-            ps.executeUpdate();
-        } catch (SQLException e) {}
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0; // Mengembalikan true jika ada baris yang bertambah
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return false; // Mengembalikan false jika terjadi error SQL
+        }
     }
 
     @Override
-    public void update(Produk produk) {
+    public boolean update(Produk produk) {
         String sql = "UPDATE produk SET nama_produk=?, harga=?, stok=? WHERE id=?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, produk.getNamaProduk());
             ps.setDouble(2, produk.getHarga());
             ps.setInt(3, produk.getStok());
             ps.setInt(4, produk.getId());
-            ps.executeUpdate();
-        } catch (SQLException e) {}
+
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0; // Mengembalikan true jika ada baris yang diperbarui
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return false;        // Mengembalikan false jika terjadi error SQL
+        }
     }
 
     @Override
-    public void delete(int id) {
+    public boolean delete(int id) {
         String sql = "DELETE FROM produk WHERE id=?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, id);
-            ps.executeUpdate();
-        } catch (SQLException e) {}
+
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0; // Mengembalikan true jika ada baris yang dihapus
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
     }
 
     @Override
@@ -61,15 +75,17 @@ public class ProdukRepositoryImpl implements ProdukRepository {
         try (Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 Produk p = new Produk(
-                    rs.getInt("id"),
-                    rs.getString("nama_produk"),
-                    rs.getDouble("harga"),
-                    rs.getInt("stok")
+                        rs.getInt("id"),
+                        rs.getString("nama_produk"),
+                        rs.getDouble("harga"),
+                        rs.getInt("stok")
                 );
                 list.add(p);
             }
-        } catch (SQLException e) {}
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
         return list;
     }
-    
+
 }
